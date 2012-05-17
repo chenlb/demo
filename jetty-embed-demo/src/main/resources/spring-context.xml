@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for PetClinic on JDBC.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="logFilter" class="com.chenlb.demo.jetty.servlet.LogFilter" />
+
+	<bean id="helloServlet" class="com.chenlb.demo.jetty.servlet.HelloServlet" />
+
+	<bean id="jettyEmbedServer" class="com.chenlb.demo.jetty.JettyEmbedServer">
+		<property name="port" value="8983" />
+		<property name="threadNum" value="50" />
+		<property name="contextPath" value="/embed" />
+		<property name="webPath" value="./src/main/webapp" />
+
+		<!-- filters -->
+		<property name="filters">
+			<map>
+				<entry key="/*" value-ref="logFilter"/>
+			</map>
+		</property>
+
+		<!-- servlets -->
+		<property name="servlets">
+			<map>
+				<entry key="/hello/*" value-ref="helloServlet"/>
+			</map>
+		</property>
+	</bean>
+
+</beans>
