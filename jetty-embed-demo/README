@@ -1,0 +1,11 @@
+运行 com.chenlb.demo.jetty.JettyEmbedServer
+
+#验证 hello servlet
+http://localhost:8983/embed/hello?what=this-is-jetty-embed-http
+
+#验证 jsp
+http://localhost:8983/embed/index.jsp
+
+#管制台可以看到日志如
+20:33:49.328 INFO servlet.LogFilter(36) ip=127.0.0.1, prot=8983, contextPath=/embed, servletPath=/index.jsp, pathInfo=null, params={}
+20:34:02.291 INFO servlet.LogFilter(36) ip=127.0.0.1, prot=8983, contextPath=/embed, servletPath=/hello, pathInfo=/chenlb, params={what=[this-is-jetty-embed-http]}
